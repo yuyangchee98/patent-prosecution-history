@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patent Search</title>
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        p.secondary-info {
+            margin-bottom: 1.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="text"] {
+            padding: 0.5rem;
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Search for the History of a Patent Application</h1>
+        <p class="secondary-info">For example: JP2020003103</p>
+        <form id="searchForm" hx-get="" hx-trigger="submit" hx-target="this" hx-swap="none">
+            <input type="text" id="patentNumber" name="patentNumber" placeholder="Enter Patent application number" required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const patentNumber = document.getElementById('patentNumber').value;
+            const url = `https://register.epo.org/rssFamily?apns=${patentNumber}&lng=en`;
+            window.location.href = url;
+        });
+    </script>
+</body>
+</html>
