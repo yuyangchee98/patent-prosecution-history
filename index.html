@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patent Search</title>
-    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,7 +25,6 @@
             margin-bottom: 1rem;
             color: #333;
         }
-
         p.secondary-info {
             margin-bottom: 1.5rem;
             color: #666;
@@ -63,8 +61,8 @@
     <div class="container">
         <h1>Search for the History of a Patent Application</h1>
         <p class="secondary-info">For example: JP2020003103</p>
-        <form id="searchForm" hx-get="" hx-trigger="submit" hx-target="this" hx-swap="none">
-            <input type="text"  id="patentNumber" name="patentNumber" placeholder="Enter Patent application number" required>
+        <form id="searchForm">
+            <input type="text" id="patentNumber" name="patentNumber" placeholder="Enter Patent application number" required>
             <button type="submit">Search</button>
         </form>
     </div>
@@ -74,19 +72,8 @@
             event.preventDefault();
             const patentNumber = document.getElementById('patentNumber').value;
             const url = `https://register.epo.org/rssFamily?apns=${patentNumber}&lng=en`;
-            fetch(url)
-                .then(response => console.log(response.text()))
-                .then(data => {
-                    // Process the data here
-                    console.log(data);
-                    // You can parse the data and display it on the page
-                })
-                .catch(error => console.error('Error fetching data:', error));
+            window.open(url, '_blank');
         });
     </script>
-
-    <!-- <footer style="position: absolute; bottom: 0; width: 100%; text-align: center; padding: 1rem; background-color: #f4f4f9;">
-        <a href="https://yaaaang.com" target="_blank" style="color: #007bff; text-decoration: none;">Visit yaaaang.com</a> 
-    </footer> !-->
 </body>
 </html>
